@@ -1,0 +1,95 @@
+
+
+apply plugin: 'kotlin-multiplatform'
+apply plugin: 'kotlinx-serialization'
+
+kotlin {
+
+    def coroutine_version = "1.1.1"
+    def ktor_version = "1.1.4"
+    def serializer_version = "0.11.0"
+
+    targets {
+        fromPreset(presets.jvm, 'android')
+
+        // iPhone simulator    : presets.iosX64
+        // real iDevice 32 bit : presets.iosArm32
+        // real iDevice 64 bit : presets.iosArm64
+        def iosPreset = presets.iosX64
+
+        fromPreset(iosPreset, 'ios') {
+            binaries {
+                framework {
+                    // Disable bitcode embedding for the simulator build.
+                    if (iosPreset == presets.iosX64) {
+                        embedBitcode("disable")
+                    }
+                }
+            }
+        }
+    }
+
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutine_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serializer_version"
+                implementation "io.ktor:ktor-client-core:$ktor_version"
+                implementation "io.ktor:ktor-client-logging:$ktor_version"
+                implementation "org.slf4j:slf4j-simple:1.6.1"
+
+
+            }
+        }
+        androidMain {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializer_version"
+                implementation "io.ktor:ktor-client-android:$ktor_version"
+                implementation "io.ktor:ktor-client-logging-jvm:$ktor_version"
+
+
+            }
+        }
+        iosMain {
+            dependencies {
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$coroutine_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serializer_version"
+                implementation "io.ktor:ktor-client-ios:$ktor_version"
+                implementation "io.ktor:ktor-client-logging:$ktor_version"
+
+            }
+
+        }
+    }
+
+}
+
+configurations {
+    compileClasspath
+}
+
+// This task attaches native framework built from ios module to Xcode project
+// (see iosApp directory). Don't run this task directly,
+// Xcode runs this task itself during its build process.
+// Before opening the project from iosApp directory in Xcode,
+// make sure all Gradle infrastructure exists (gradle.wrapper, gradlew).
+task copyFramework {
+    def buildType = project.findProperty("kotlin.build.type") ?: "DEBUG"
+    dependsOn "link${buildType.toLowerCase().capitalize()}FrameworkIos"
+
+    doLast {
+        def srcFile = kotlin.targets.ios.binaries.getFramework(buildType).outputFile
+        def targetDir = getProperty("configuration.build.dir")
+        copy {
+            from srcFile.parent
+            into targetDir
+            include 'app.framework/**'
+            include 'app .framework.dSYM'
+        }
+    }
+}
+
