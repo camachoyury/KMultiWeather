@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C2BDDCB022CBA3BF002FB5F9 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BDDCAF22CBA3BF002FB5F9 /* UIColorExtensions.swift */; };
+		C2BDDCB322CBA7C4002FB5F9 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BDDCB222CBA7C4002FB5F9 /* Header.swift */; };
+		C2BDDCB522CBA875002FB5F9 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BDDCB422CBA875002FB5F9 /* WeatherCell.swift */; };
+		C2BDDCC022CBCBE5002FB5F9 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BDDCBF22CBCBE5002FB5F9 /* Utils.swift */; };
+		C2BDDCC322CBD1B7002FB5F9 /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BDDCC222CBD1B7002FB5F9 /* IntExtension.swift */; };
+		C2BDDCC522CBDD69002FB5F9 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BDDCC422CBDD69002FB5F9 /* DateExtension.swift */; };
 		D256C89C22BC52F100AC206A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D256C89B22BC52F100AC206A /* AppDelegate.swift */; };
 		D256C89E22BC52F100AC206A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D256C89D22BC52F100AC206A /* ViewController.swift */; };
 		D256C8A122BC52F100AC206A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D256C89F22BC52F100AC206A /* Main.storyboard */; };
@@ -31,6 +37,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C2BDDCAF22CBA3BF002FB5F9 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		C2BDDCB222CBA7C4002FB5F9 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
+		C2BDDCB422CBA875002FB5F9 /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
+		C2BDDCBF22CBCBE5002FB5F9 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		C2BDDCC222CBD1B7002FB5F9 /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
+		C2BDDCC422CBDD69002FB5F9 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		D256C89822BC52F100AC206A /* IOSWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D256C89B22BC52F100AC206A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D256C89D22BC52F100AC206A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +65,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C2BDDCB122CBA7B6002FB5F9 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				C2BDDCB222CBA7C4002FB5F9 /* Header.swift */,
+				C2BDDCB422CBA875002FB5F9 /* WeatherCell.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		C2BDDCC122CBCE93002FB5F9 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				C2BDDCAF22CBA3BF002FB5F9 /* UIColorExtensions.swift */,
+				C2BDDCBF22CBCBE5002FB5F9 /* Utils.swift */,
+				C2BDDCC222CBD1B7002FB5F9 /* IntExtension.swift */,
+				C2BDDCC422CBDD69002FB5F9 /* DateExtension.swift */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
 		D256C88F22BC52F100AC206A = {
 			isa = PBXGroup;
 			children = (
@@ -73,6 +105,8 @@
 		D256C89A22BC52F100AC206A /* IOSWeather */ = {
 			isa = PBXGroup;
 			children = (
+				C2BDDCC122CBCE93002FB5F9 /* Global */,
+				C2BDDCB122CBA7B6002FB5F9 /* SubViews */,
 				D256C89B22BC52F100AC206A /* AppDelegate.swift */,
 				D256C89D22BC52F100AC206A /* ViewController.swift */,
 				D256C89F22BC52F100AC206A /* Main.storyboard */,
@@ -155,8 +189,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2BDDCB322CBA7C4002FB5F9 /* Header.swift in Sources */,
+				C2BDDCC522CBDD69002FB5F9 /* DateExtension.swift in Sources */,
+				C2BDDCB022CBA3BF002FB5F9 /* UIColorExtensions.swift in Sources */,
+				C2BDDCC322CBD1B7002FB5F9 /* IntExtension.swift in Sources */,
+				C2BDDCB522CBA875002FB5F9 /* WeatherCell.swift in Sources */,
 				D256C89E22BC52F100AC206A /* ViewController.swift in Sources */,
 				D256C89C22BC52F100AC206A /* AppDelegate.swift in Sources */,
+				C2BDDCC022CBCBE5002FB5F9 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,21 +342,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 94RJMB6U3U;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = IOSWeather/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.camachoyury.iosweather.IOSWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -324,21 +366,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 94RJMB6U3U;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = IOSWeather/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.camachoyury.iosweather.IOSWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
