@@ -8,8 +8,9 @@
 
 import UIKit
 import core
+import CoreLocation
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,UISearchBarDelegate,CLLocationManagerDelegate {
 
     
     var collectionview: UICollectionView!
@@ -17,15 +18,23 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     var headerId = "Header"
     var weatherArray: [Weather] = []
     var currentWeather: CurrentWeather!
+    var searchBar:UISearchBar!
+    let locationManager = CLLocationManager()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         //VC title
         navigationController?.navigationBar.barTintColor = UIColor(rgb: 0x00a0fa)
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.topItem?.title = "MultiWeather"
+        
+        searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 200, height: 20))
+        searchBar.placeholder = "Search"
+        searchBar.delegate = self
+        
+        let leftNavBarButton = UIBarButtonItem(customView:searchBar)
+        self.navigationItem.leftBarButtonItem = leftNavBarButton
         
         ///UICollectionViewlayout
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -43,13 +52,26 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         collectionview.backgroundColor = UIColor(rgb: 0x008cfa)
         self.view.addSubview(collectionview)
         
-        getWeatherByCity()
+        getWeatherByCity(site: "cochabamba")
+        
+        
+        ///location manager
+        locationManager.delegate = self          // For use when the app is open
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        let rightButtonItem = UIBarButtonItem.init(
+            image: UIImage(named: "location")!.withRenderingMode(.alwaysTemplate),
+            style: .done,
+            target: self,
+            action: #selector(rightButtonAction)
+        )
+        
+        rightButtonItem.tintColor = UIColor.white
+        self.navigationItem.rightBarButtonItem = rightButtonItem
         
 
-        
-        
-        
-        
         
 //        weather.getCurrentWeatherByLocation(success: { res in print("COORDENADAS: \(res.coord.lat) \(res.coord.lon)")
 //                                                                    return KotlinUnit()
@@ -62,10 +84,32 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
         }
     
-    func getWeatherByCity()
+        @objc func rightButtonAction()
+        {
+        
+        }
+    
+       func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            print(location.coordinate.latitude)
+            }
+        }
+        func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
+        {         if(status == CLAuthorizationStatus.denied)
+                    {
+ 
+                    }
+                else{
+                    locationManager.startUpdatingLocation()
+                }
+        }
+        
+    
+    
+    func getWeatherByCity(site:String)
     {
         let weather = GetCurrentWeather()
-        weather.getCurrentWeatherByName(city: "cochabamba",
+        weather.getCurrentWeatherByName(city: site,
                                         success: {
                                             res in print("COORDENADAS: " + res.base)
                                                 self.currentWeather = res
@@ -107,6 +151,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 250)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        getWeatherByCity(site: searchBar.text!)
     }
     
     

@@ -18,6 +18,7 @@ class Header: UICollectionViewCell  {
     var maxLabel : UILabel!
     var forecastLabel : UILabel!
     
+    
     var weather: Weather!{
          willSet{
             imageView.image = Utils.getArtResourceForWeatherCondition(weatherId: Int(newValue.id))
