@@ -22,8 +22,9 @@ class WheaterCell: UICollectionViewCell {
     var foreCastItem: ForecastItem!{
         willSet{
             imageView.image = Utils.getIconResourceForWeatherCondition(weatherId: Int(newValue.weather.first!.id))
-            forecastLabel.text = newValue.weather.first!.main
-            //descriptionForecastLabel.text = newValue.weather.first!.description
+            let date = Date(milliseconds:Int(newValue.dt) * 1000)
+            forecastLabel.text =  date.toString(dateFormat: "EEE")
+            descriptionForecastLabel.text = newValue.weather.first!.main
             maxLabel.text = String(Int(newValue.temp.max)) + " °C"
             minLabel.text = String(Int(newValue.temp.min)) + " °C"
             self.setNeedsLayout()

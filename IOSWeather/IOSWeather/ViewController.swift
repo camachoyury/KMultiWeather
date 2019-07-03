@@ -172,7 +172,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         {
             header.weather = self.weatherArray.first
             header.currentWeather = self.currentWeather
-            let date = Date(milliseconds: Int(self.currentWeather!.dt))
+            let date = Date(milliseconds: Int(self.currentWeather!.dt)*1000)
             header.dateLabel.text = date.toString(dateFormat: "MMM dd, yyyy")
         }
 
