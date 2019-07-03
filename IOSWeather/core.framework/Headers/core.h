@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@class CoreInjector, CoreApi, CoreGetLocation, CoreHourlyForecastRepositoryImpl, CoreConstants, CoreClouds, CoreCloudsCompanion, CoreClouds$serializer, CoreKotlinArray, CoreCoord, CoreCoordCompanion, CoreCoord$serializer, CoreCurrentWeather, CoreWeather, CoreMain, CoreWind, CoreSys, CoreCurrentWeatherCompanion, CoreCurrentWeather$serializer, CoreMainCompanion, CoreMain$serializer, CoreSysCompanion, CoreSys$serializer, CoreWeatherCompanion, CoreWeather$serializer, CoreWindCompanion, CoreWind$serializer, CoreKLocation, CoreCity, CoreCityCompanion, CoreCity$serializer, CoreForecastItem, CoreTemp, CoreForecastItemCompanion, CoreForecastItem$serializer, CoreHourlyWeather, CoreHourlyWeatherCompanion, CoreHourlyWeather$serializer, CoreTempCompanion, CoreTemp$serializer, CoreCurrentCurrentWeatherRepositoryImpl, CoreKotlinUnit, CoreKotlinThrowable, CoreGetCurrentWeather, CoreGetHourlyForecast, CoreKotlinx_serialization_runtime_nativeEnumDescriptor, CoreKotlinx_serialization_runtime_nativeSerialKind, CoreKotlinNothing, CoreKotlinx_serialization_runtime_nativeUpdateMode, CoreKotlinx_serialization_runtime_nativeSerialClassDescImpl, CoreKotlinEnum;
+@class CoreInjector, CoreApi, CoreGetLocation, CoreHourlyForecastRepositoryImpl, CoreKotlinUnit, CoreHourlyWeather, CoreKotlinThrowable, CoreKLocation, CoreConstants, CoreClouds, CoreCloudsCompanion, CoreClouds$serializer, CoreKotlinArray, CoreCoord, CoreCoordCompanion, CoreCoord$serializer, CoreCurrentWeather, CoreWeather, CoreMain, CoreWind, CoreSys, CoreCurrentWeatherCompanion, CoreCurrentWeather$serializer, CoreMainCompanion, CoreMain$serializer, CoreSysCompanion, CoreSys$serializer, CoreWeatherCompanion, CoreWeather$serializer, CoreWindCompanion, CoreWind$serializer, CoreCity, CoreCityCompanion, CoreCity$serializer, CoreForecastItem, CoreTemp, CoreForecastItemCompanion, CoreForecastItem$serializer, CoreHourlyWeatherCompanion, CoreHourlyWeather$serializer, CoreTempCompanion, CoreTemp$serializer, CoreCurrentCurrentWeatherRepositoryImpl, CoreGetCurrentWeather, CoreGetForecast, CoreKotlinx_serialization_runtime_nativeEnumDescriptor, CoreKotlinx_serialization_runtime_nativeSerialKind, CoreKotlinNothing, CoreKotlinx_serialization_runtime_nativeUpdateMode, CoreKotlinx_serialization_runtime_nativeSerialClassDescImpl, CoreKotlinEnum;
 
 @protocol CoreCurrentWeatherRepository, CoreHourlyForecastRepository, CoreKotlinx_serialization_runtime_nativeKSerializer, CoreKotlinx_serialization_runtime_nativeGeneratedSerializer, CoreKotlinx_serialization_runtime_nativeSerializationStrategy, CoreKotlinx_serialization_runtime_nativeEncoder, CoreKotlinx_serialization_runtime_nativeSerialDescriptor, CoreKotlinx_serialization_runtime_nativeDeserializationStrategy, CoreKotlinx_serialization_runtime_nativeDecoder, CoreKotlinIterator, CoreKotlinx_serialization_runtime_nativeCompositeEncoder, CoreKotlinx_serialization_runtime_nativeSerialModule, CoreKotlinAnnotation, CoreKotlinx_serialization_runtime_nativeCompositeDecoder, CoreKotlinx_serialization_runtime_nativeSerialModuleCollector, CoreKotlinKClass, CoreKotlinComparable, CoreKotlinKDeclarationContainer, CoreKotlinKAnnotatedElement, CoreKotlinKClassifier;
 
@@ -156,6 +156,8 @@ __attribute__((swift_name("Injector")))
 __attribute__((swift_name("HourlyForecastRepository")))
 @protocol CoreHourlyForecastRepository
 @required
+- (void)fetchCurrentWeatherHourlyByNameCity:(NSString *)city success:(CoreKotlinUnit *(^)(CoreHourlyWeather *))success failure:(CoreKotlinUnit *(^)(CoreKotlinThrowable * _Nullable))failure __attribute__((swift_name("fetchCurrentWeatherHourlyByName(city:success:failure:)")));
+- (void)fetchCurrentWeatherHourlyByLocationLocation:(CoreKLocation *)location success:(CoreKotlinUnit *(^)(CoreHourlyWeather *))success failure:(CoreKotlinUnit *(^)(CoreKotlinThrowable * _Nullable))failure __attribute__((swift_name("fetchCurrentWeatherHourlyByLocation(location:success:failure:)")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
@@ -663,14 +665,37 @@ __attribute__((swift_name("GetCurrentWeather")))
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 - (void)getCurrentWeatherByNameCity:(NSString *)city success:(CoreKotlinUnit *(^)(CoreCurrentWeather *))success failure:(CoreKotlinUnit *(^)(CoreKotlinThrowable * _Nullable))failure __attribute__((swift_name("getCurrentWeatherByName(city:success:failure:)")));
-- (void)getCurrentWeatherByLocationSuccess:(CoreKotlinUnit *(^)(CoreCurrentWeather *))success failure:(CoreKotlinUnit *(^)(CoreKotlinThrowable * _Nullable))failure __attribute__((swift_name("getCurrentWeatherByLocation(success:failure:)")));
+- (void)getCurrentWeatherByLocationKLocation:(CoreKLocation *)kLocation success:(CoreKotlinUnit *(^)(CoreCurrentWeather *))success failure:(CoreKotlinUnit *(^)(CoreKotlinThrowable * _Nullable))failure __attribute__((swift_name("getCurrentWeatherByLocation(kLocation:success:failure:)")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("GetHourlyForecast")))
-@interface CoreGetHourlyForecast : KotlinBase
+__attribute__((swift_name("GetForecast")))
+@interface CoreGetForecast : KotlinBase
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (void)getForecastByNameCity:(NSString *)city success:(CoreKotlinUnit *(^)(CoreHourlyWeather *))success failure:(CoreKotlinUnit *(^)(CoreKotlinThrowable * _Nullable))failure __attribute__((swift_name("getForecastByName(city:success:failure:)")));
+- (void)getForecastByLocationKLocation:(CoreKLocation *)kLocation success:(CoreKotlinUnit *(^)(CoreHourlyWeather *))success failure:(CoreKotlinUnit *(^)(CoreKotlinThrowable * _Nullable))failure __attribute__((swift_name("getForecastByLocation(kLocation:success:failure:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KotlinUnit")))
+@interface CoreKotlinUnit : KotlinBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)unit __attribute__((swift_name("init()")));
+@end;
+
+__attribute__((swift_name("KotlinThrowable")))
+@interface CoreKotlinThrowable : KotlinBase
+- (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithCause:(CoreKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (instancetype)initWithMessage:(NSString * _Nullable)message cause:(CoreKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer));
+- (CoreKotlinArray *)getStackTrace __attribute__((swift_name("getStackTrace()")));
+- (void)printStackTrace __attribute__((swift_name("printStackTrace()")));
+@property (readonly) CoreKotlinThrowable * _Nullable cause __attribute__((swift_name("cause")));
+@property (readonly) NSString * _Nullable message __attribute__((swift_name("message")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
@@ -746,27 +771,6 @@ __attribute__((swift_name("Kotlinx_serialization_runtime_nativeDecoder")))
 - (id _Nullable)updateSerializableValueDeserializer:(id<CoreKotlinx_serialization_runtime_nativeDeserializationStrategy>)deserializer old:(id _Nullable)old __attribute__((swift_name("updateSerializableValue(deserializer:old:)")));
 @property (readonly) id<CoreKotlinx_serialization_runtime_nativeSerialModule> context __attribute__((swift_name("context")));
 @property (readonly) CoreKotlinx_serialization_runtime_nativeUpdateMode *updateMode __attribute__((swift_name("updateMode")));
-@end;
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("KotlinUnit")))
-@interface CoreKotlinUnit : KotlinBase
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)unit __attribute__((swift_name("init()")));
-@end;
-
-__attribute__((swift_name("KotlinThrowable")))
-@interface CoreKotlinThrowable : KotlinBase
-- (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
-- (instancetype)initWithCause:(CoreKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer));
-- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
-+ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-- (instancetype)initWithMessage:(NSString * _Nullable)message cause:(CoreKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer));
-- (CoreKotlinArray *)getStackTrace __attribute__((swift_name("getStackTrace()")));
-- (void)printStackTrace __attribute__((swift_name("printStackTrace()")));
-@property (readonly) CoreKotlinThrowable * _Nullable cause __attribute__((swift_name("cause")));
-@property (readonly) NSString * _Nullable message __attribute__((swift_name("message")));
 @end;
 
 __attribute__((swift_name("KotlinIterator")))

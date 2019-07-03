@@ -17,6 +17,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     var cellId = "Cell"
     var headerId = "Header"
     var weatherArray: [Weather] = []
+    var weatherForeCastArray : [ForecastItem] = []
     var currentWeather: CurrentWeather!
     var searchBar:UISearchBar!
     let locationManager = CLLocationManager()
@@ -40,6 +41,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.itemSize = CGSize(width: view.frame.width, height: view.frame.size.height)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
         
         ///UICollectionView
         collectionview = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
@@ -51,9 +54,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         collectionview.showsVerticalScrollIndicator = false
         collectionview.backgroundColor = UIColor(rgb: 0x008cfa)
         self.view.addSubview(collectionview)
-        
-        getWeatherByCity(site: "cochabamba")
-        
         
         ///location manager
         locationManager.delegate = self          // For use when the app is open
@@ -70,6 +70,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         rightButtonItem.tintColor = UIColor.white
         self.navigationItem.rightBarButtonItem = rightButtonItem
+        
+        //hide keyboard when tap on view
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
+        //core default call
+        getWeatherByCity(site: "cochabamba")
         
 
         
@@ -97,7 +104,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
         {         if(status == CLAuthorizationStatus.denied)
                     {
- 
+                        ///permission failed
                     }
                 else{
                     locationManager.startUpdatingLocation()
@@ -114,22 +121,46 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                                             res in print("COORDENADAS: " + res.base)
                                                 self.currentWeather = res
                                                 self.weatherArray = res.weather
-                                                self.collectionview.reloadData()
+                                            
+                                                self.getWeatherForeCast(site: site)
                                             return KotlinUnit()
         }, failure: {
             print($0?.message ?? "Empty error")
             return KotlinUnit()
         })
+        
+
+    }
+    
+    func getWeatherForeCast(site: String)
+    {
+        let forecast = GetForecast()
+        forecast.getForecastByName(city: site,
+                                   success: {
+                                        res in print(res)
+                                        self.weatherForeCastArray = res.list
+                                        self.collectionview.reloadData()
+                                        return KotlinUnit()
+                },
+                                   failure: {
+            print($0?.message ?? "Empty error")
+            return KotlinUnit()
+            })
     }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.weatherArray.count
+        return weatherForeCastArray.count
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionview.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath as IndexPath) as! WheaterCell
+        if(self.weatherForeCastArray.count>0)
+        {
+            cell.foreCastItem = self.weatherForeCastArray[indexPath.row]
+        }
         return cell
     }
     
@@ -144,7 +175,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             let date = Date(milliseconds: Int(self.currentWeather!.dt))
             header.dateLabel.text = date.toString(dateFormat: "MMM dd, yyyy")
         }
-        
 
         return header
     }
@@ -153,8 +183,17 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return CGSize(width: view.frame.width, height: 250)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 70)
+    }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         getWeatherByCity(site: searchBar.text!)
+    }
+    
+    //Calls this function when the tap is recognized, hide keyboard
+    @objc func dismissKeyboard() {
+        searchBar.endEditing(true)
     }
     
     

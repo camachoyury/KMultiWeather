@@ -13,13 +13,13 @@
 		C2BDDCC022CBCBE5002FB5F9 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BDDCBF22CBCBE5002FB5F9 /* Utils.swift */; };
 		C2BDDCC322CBD1B7002FB5F9 /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BDDCC222CBD1B7002FB5F9 /* IntExtension.swift */; };
 		C2BDDCC522CBDD69002FB5F9 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BDDCC422CBDD69002FB5F9 /* DateExtension.swift */; };
+		C2BDDCDE22CD3E93002FB5F9 /* core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2BDDCDD22CD3E93002FB5F9 /* core.framework */; };
+		C2BDDCDF22CD3EF0002FB5F9 /* core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C2BDDCDD22CD3E93002FB5F9 /* core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D256C89C22BC52F100AC206A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D256C89B22BC52F100AC206A /* AppDelegate.swift */; };
 		D256C89E22BC52F100AC206A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D256C89D22BC52F100AC206A /* ViewController.swift */; };
 		D256C8A122BC52F100AC206A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D256C89F22BC52F100AC206A /* Main.storyboard */; };
 		D256C8A322BC52F300AC206A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D256C8A222BC52F300AC206A /* Assets.xcassets */; };
 		D256C8A622BC52F300AC206A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D256C8A422BC52F300AC206A /* LaunchScreen.storyboard */; };
-		D256C8AF22BC533C00AC206A /* core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D256C8AD22BC532A00AC206A /* core.framework */; };
-		D256C8B022BC533C00AC206A /* core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D256C8AD22BC532A00AC206A /* core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,7 +29,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D256C8B022BC533C00AC206A /* core.framework in Embed Frameworks */,
+				C2BDDCDF22CD3EF0002FB5F9 /* core.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -43,6 +43,7 @@
 		C2BDDCBF22CBCBE5002FB5F9 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		C2BDDCC222CBD1B7002FB5F9 /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
 		C2BDDCC422CBDD69002FB5F9 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		C2BDDCDD22CD3E93002FB5F9 /* core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = core.framework; sourceTree = "<group>"; };
 		D256C89822BC52F100AC206A /* IOSWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D256C89B22BC52F100AC206A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D256C89D22BC52F100AC206A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -50,7 +51,6 @@
 		D256C8A222BC52F300AC206A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D256C8A522BC52F300AC206A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D256C8A722BC52F300AC206A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D256C8AD22BC532A00AC206A /* core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = core.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D256C8AF22BC533C00AC206A /* core.framework in Frameworks */,
+				C2BDDCDE22CD3E93002FB5F9 /* core.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +88,7 @@
 		D256C88F22BC52F100AC206A = {
 			isa = PBXGroup;
 			children = (
-				D256C8AD22BC532A00AC206A /* core.framework */,
+				C2BDDCDD22CD3E93002FB5F9 /* core.framework */,
 				D256C89A22BC52F100AC206A /* IOSWeather */,
 				D256C89922BC52F100AC206A /* Products */,
 			);
@@ -348,6 +348,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/IOSWeather",
 				);
 				INFOPLIST_FILE = IOSWeather/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -373,6 +374,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/IOSWeather",
 				);
 				INFOPLIST_FILE = IOSWeather/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
