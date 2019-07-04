@@ -36,8 +36,8 @@ class ForecastAdapter: RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>(
         fun bind(forecastItem: ForecastItem){
             view.apply {
                 list_item_icon.setImageResource(Utils.getIconResourceForWeatherCondition(forecastItem.weather.first().id))
-                list_item_date_textview.text = Utils.formatDateDay(forecastItem.dt)
-                list_item_forecast_textview.text = forecastItem.weather.first().main.toString()
+                list_item_date_textview.text = Utils.formatDateDay(forecastItem.dt  * 1000)
+                list_item_forecast_textview.text = forecastItem.weather.first().main
                 list_item_high_textview.text= forecastItem.temp.max.toInt().toString()  + " °C"
                 list_item_low_textview.text = forecastItem.temp.min.toInt().toString()  + " °C"
 

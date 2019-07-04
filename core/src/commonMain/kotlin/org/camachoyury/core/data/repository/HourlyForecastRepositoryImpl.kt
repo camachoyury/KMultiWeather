@@ -9,7 +9,7 @@ import org.camachoyury.core.domain.weather.HourlyForecastRepository
 import org.camachoyury.core.shared.Api
 
 class HourlyForecastRepositoryImpl(private val api: Api): HourlyForecastRepository{
-    override suspend fun fetchCurrentWeatherHourlyByName(
+    override  fun fetchCurrentWeatherHourlyByName(
         city: String,
         success: (HourlyWeather) -> Unit,
         failure: (Throwable?) -> Unit
@@ -23,7 +23,7 @@ class HourlyForecastRepositoryImpl(private val api: Api): HourlyForecastReposito
         }
     }
 
-    override suspend fun fetchCurrentWeatherHourlyByLocation(
+    override  fun fetchCurrentWeatherHourlyByLocation(
         location: KLocation,
         success: (HourlyWeather) -> Unit,
         failure: (Throwable?) -> Unit

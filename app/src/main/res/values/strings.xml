@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MultiWeather</string>
+        <string name="rationale_location">This app needs access to your location so you can get the weather of your location.</string>
 </resources>
