@@ -29,8 +29,8 @@ class Header: UICollectionViewCell  {
     
     var currentWeather: CurrentWeather!{
         willSet{
-            maxLabel.text = String(newValue.main.temp_max) + " C"
-            minLabel.text = String(newValue.main.temp_min) + " C"
+            maxLabel.text = String(newValue.main.temp_max) + " °C"
+            minLabel.text = String(newValue.main.temp_min) + " °C"
             self.setNeedsLayout()
         }
     }
