@@ -1,4 +1,4 @@
-package org.camachoyury.core.domain.weather
+package org.camachoyury.core.domain.actions
 
 import org.camachoyury.core.Injector
 import org.camachoyury.core.domain.model.HourlyWeather

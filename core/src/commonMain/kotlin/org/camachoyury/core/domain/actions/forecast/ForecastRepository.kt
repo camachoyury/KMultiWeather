@@ -1,10 +1,9 @@
-package org.camachoyury.core.domain.weather
+package org.camachoyury.core.domain.actions
 
 import org.camachoyury.core.domain.model.HourlyWeather
 import org.camachoyury.core.domain.model.KLocation
-import org.camachoyury.core.shared.CurrentWeather
 
-interface HourlyForecastRepository {
+interface ForecastRepository {
 
      fun fetchCurrentWeatherHourlyByName(city :String, success: (HourlyWeather) -> Unit, failure: (Throwable?) -> Unit)
 

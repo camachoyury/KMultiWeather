@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.*
 import org.camachoyury.core.domain.model.ForecastItem
 import org.camachoyury.core.domain.model.KLocation
-import org.camachoyury.core.domain.weather.GetCurrentWeather
-import org.camachoyury.core.domain.weather.GetForecast
+import org.camachoyury.core.domain.actions.GetCurrentWeather
+import org.camachoyury.core.domain.actions.GetForecast
 import org.camachoyury.core.shared.CurrentWeather
 import kotlin.coroutines.CoroutineContext
 
@@ -33,12 +33,24 @@ class ForecastViewModel(private val currentWeather: GetCurrentWeather, private v
     }
 
 
-    fun getCurrentWeatherByLocation() {
+    fun getCurrentWeatherByLocation(kLocation: KLocation) {
         launch(Dispatchers.Main) {
             withContext(Dispatchers.IO) {
                 currentWeather.getCurrentWeatherByLocation(
-                    KLocation(0.0,0.0),
+                    kLocation,
                     success = {   weather.postValue(it) },
+                    failure = ::handleError
+                )
+            }
+        }
+    }
+
+    fun getForecastByLocation(kLocation: KLocation) {
+        launch(Dispatchers.Main) {
+            withContext(Dispatchers.IO) {
+                forecast.getForecastByLocation(
+                    kLocation,
+                    success = {   forecastList.postValue(it.list) },
                     failure = ::handleError
                 )
             }

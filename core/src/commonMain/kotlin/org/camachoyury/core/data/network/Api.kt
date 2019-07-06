@@ -29,7 +29,7 @@ class Api {
     }
     @UseExperimental(kotlinx.serialization.UnstableDefault::class)
     suspend fun fetchCurrentWeatherByName(city: String):CurrentWeather {
-
+        val urls = "http://api.openweathermap.org/data/2.5/weather?q=$city&appid=6de610c0a9e87cdaf1b93a295e60492d"
         val url = BASE_URL +  WEATHER + QUERY + city + APP_ID + UNITS
         print("URL $url")
         val json = client.get<String>(url)
@@ -42,6 +42,8 @@ class Api {
     suspend fun fetchCurrentWeatherByLocation(lat: Double, lng: Double ):CurrentWeather {
 
         val url = BASE_URL +  WEATHER + LATITUDE + lat + LONGITUDE+ lng + APP_ID + UNITS
+
+
         print("URL $url")
         val json = client.get<String>(url)
         return Json.nonstrict.parse(CurrentWeather.serializer(), json)

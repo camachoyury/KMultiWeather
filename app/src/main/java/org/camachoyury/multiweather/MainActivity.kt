@@ -4,21 +4,21 @@ import android.Manifest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import kotlinx.android.synthetic.main.activity_main.*
 import org.camachoyury.core.domain.model.ForecastItem
 import org.camachoyury.core.shared.CurrentWeather
 import org.camachoyury.multiweather.Utils.formatDate
 import pub.devrel.easypermissions.EasyPermissions
-
-
 import kotlin.math.roundToInt
-
-
-
-
+import com.google.android.gms.tasks.OnSuccessListener
+import org.camachoyury.core.domain.model.KLocation
 
 
 class MainActivity: AppCompatActivity(), EasyPermissions.PermissionCallbacks {
@@ -27,6 +27,7 @@ class MainActivity: AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     lateinit var forecastAdapter: ForecastAdapter
     private val CAMERA_REQUEST_CODE = 100
 
+    lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +39,8 @@ class MainActivity: AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         updateCurrentWeather()
 
         validatePermsssions()
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
 
         forecastAdapter = ForecastAdapter()
 
@@ -59,6 +62,31 @@ class MainActivity: AppCompatActivity(), EasyPermissions.PermissionCallbacks {
                 }
             })
 
+
+
+        cityName.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+             override fun onQueryTextSubmit(query: String): Boolean {
+                 viewModel.getCurrentWeather(query)
+                 viewModel.getForecastByLocation(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+        })
+
+        icLocation.setOnClickListener {
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener(this) { location ->
+                    // Got last known location. In some rare situations this can be null.
+                    if (location != null) {
+                        var kLacation = KLocation(location.latitude,location.longitude)
+                        viewModel.getCurrentWeatherByLocation(kLacation)
+                        viewModel.getForecastByLocation(kLacation)
+                    }
+                }
+        }
 
 
     }

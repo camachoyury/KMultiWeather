@@ -5,10 +5,10 @@ import kotlinx.coroutines.launch
 import org.camachoyury.core.ApplicationDispatcher
 import org.camachoyury.core.domain.model.HourlyWeather
 import org.camachoyury.core.domain.model.KLocation
-import org.camachoyury.core.domain.weather.HourlyForecastRepository
+import org.camachoyury.core.domain.actions.ForecastRepository
 import org.camachoyury.core.shared.Api
 
-class HourlyForecastRepositoryImpl(private val api: Api): HourlyForecastRepository{
+class ForecastRepositoryImpl(private val api: Api): ForecastRepository{
     override  fun fetchCurrentWeatherHourlyByName(
         city: String,
         success: (HourlyWeather) -> Unit,

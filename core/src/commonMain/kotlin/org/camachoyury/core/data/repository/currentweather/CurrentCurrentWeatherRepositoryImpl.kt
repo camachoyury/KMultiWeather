@@ -1,4 +1,4 @@
-package org.camachoyury.core.domain.weather
+package org.camachoyury.core.domain.actions
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
